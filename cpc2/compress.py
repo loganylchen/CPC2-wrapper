@@ -12,10 +12,10 @@ def gz_file(fq_file, mode, level=6):
         if fq_file.endswith("gz"):
             fq_fp = gzip.open(fq_file, mode + "b", level)
         else:
-            sys.stderr.write("[INFO] read file '%s'\n" % fq_file)
+            sys.stderr.write(f"[INFO] read file '{fq_file}'\n")
             fq_fp = open(fq_file, mode)
-    except :
-        sys.stderr.write("Error: Fail to IO file: %s\n", (fq_file))
+    except (IOError, OSError) as e:
+        sys.stderr.write(f"Error: Fail to IO file: {fq_file}: {e}\n")
         sys.exit(1)
     return fq_fp
 
@@ -25,5 +25,5 @@ def bz2file(f):
         fz = bz2.BZ2File(f)
         return fz
     else:
-        sys.stderr.write("Error: Fail to IO file: %s\n" % (f))
+        sys.stderr.write(f"Error: File is not bz2 compressed: {f}\n")
         sys.exit(1)

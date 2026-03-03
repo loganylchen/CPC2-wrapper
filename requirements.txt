@@ -1,3 +1,2 @@
-numpy
-Bio
-Biopython
+numpy>=1.20.0,<2.0.0
+biopython>=1.78,<2.0.0
